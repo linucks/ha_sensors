@@ -1,5 +1,5 @@
 FROM homeassistant/aarch64-base-python
-# FROM homeassistant/amd64-base-python
+#FROM homeassistant/amd64-base-python
 
 ENV BASEDIR=/sensors
 ENV RPIDIR=$BASEDIR/rpi

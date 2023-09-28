@@ -8,7 +8,7 @@ full_access: true
 devices:
   - /dev/ttyACM0
 services:
-  - mqtt
+  - mqtt:need
 arch:
   - aarch64
 image: "ghcr.io/linucks/rpisensors"

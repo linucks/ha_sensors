@@ -8,11 +8,15 @@ export CR_PAT=ghp_WIs2jjmhtKeqQDmn1lKp17R6PQ29UXHYiOr2aECW7
 echo $CR_PAT | docker login ghcr.io -u linucks --password-stdin
 
 # Docker needs relative paths
-# ln -s $SENSOR_DIR/sensors/rpi .
-# ln -s $SENSOR_DIR/sensors/rpi_arduino_shield .
+#ln -s  $SENSOR_DIR/sensors/rpi .
+#ln -s  $SENSOR_DIR/sensors/rpi_arduino_shield .
 cp -r $SENSOR_DIR/sensors/rpi .
 cp -r $SENSOR_DIR/sensors/rpi_arduino_shield .
 
 # Buld and push
+#docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG . 
 docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG . && \
 docker push $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG  
+
+# Clean up
+rm -rf rpi rpi_arduino_shield
