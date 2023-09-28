@@ -1,0 +1,14 @@
+name: "FU Sensors"
+description: "My first real add-on!"
+version: "latest"
+slug: "rpisensors"
+init: false
+#uart: true
+full_access: true
+devices:
+  - /dev/ttyACM0
+services:
+  - mqtt
+arch:
+  - aarch64
+image: "ghcr.io/linucks/rpisensors"
