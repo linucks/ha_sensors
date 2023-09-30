@@ -2,6 +2,11 @@
 
 CONFIG_FILE=/sensors/rpi/config.yml
 
+if ! bashio::services.available "mqtt"; then
+    echo "RPISENSORS NO MQTT AVAILABLE!"
+    exit 1
+fi
+
 MQTT_HOST=$(bashio::services mqtt "host")
 MQTT_USER=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
