@@ -5,6 +5,7 @@ slug: "rpisensors"
 init: false
 #uart: true
 full_access: true
+homeassistant_api: true
 devices:
   - /dev/ttyACM0
 services:
