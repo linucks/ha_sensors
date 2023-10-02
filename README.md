@@ -6,6 +6,13 @@ Repository for Home Assistant Sensors
 
 - https://github.com/hassio-addons/addon-ssh
 - https://github.com/hassio-addons/addon-mqtt-io
+- https://github.com/home-assistant/addons/tree/master/mosquitto
+- https://github.com/hassio-addons/addon-motioneye
+- https://github.com/hassio-addons/addon-tailscale
+
+### Useful Addons
+
+- https://github.com/hassio-addons/addon-vscode
 
 ## Networking
 
