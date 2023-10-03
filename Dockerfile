@@ -1,6 +1,6 @@
 # Need to use debian image or otherwise requried symbols from gcc aren't present
-# FROM homeassistant/aarch64-base-debian
-FROM homeassistant/amd64-base-debian
+FROM homeassistant/aarch64-base-debian
+# FROM homeassistant/amd64-base-debian
 
 # LABEL \
 #   io.hass.version="2023.9.3" \
