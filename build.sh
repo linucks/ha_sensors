@@ -4,7 +4,7 @@ IMAGE_NAME=rpi-ardcli
 IMAGE_TAG=latest
 SENSOR_DIR=/opt/fu_sensors
 
-export CR_PAT=ghp_WIs2jKeqQDmn1lKp17R6PQ29UXHYiOr2aECW7
+export CR_PAT=ghp_WIs2jKeqQjmhtDmn1lKp17R6PQ29UXHYiOr2aECW7
 echo $CR_PAT | docker login ghcr.io -u linucks --password-stdin
 
 # Docker needs relative paths
