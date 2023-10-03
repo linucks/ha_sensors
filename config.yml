@@ -1,15 +1,15 @@
-name: "FU Sensors"
-description: "My first real add-on!"
+name: "Arduino CLI"
+description: "Arduino CLI for Raspberry Pi"
 version: "latest"
-slug: "rpisensors"
+slug: "rpi-ardcli"
 init: false
 #uart: true
 full_access: true
 homeassistant_api: true
 devices:
   - /dev/ttyACM0
-services:
-  - mqtt:need
+# services:
+#   - mqtt:need
 arch:
   - aarch64
-image: "ghcr.io/linucks/rpisensors"
+image: "ghcr.io/linucks/rpi-ardcli"

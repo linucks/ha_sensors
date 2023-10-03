@@ -31,3 +31,7 @@ To configure the connection for a wifi not present at setup:
 ## Equipment
 
 - https://www.mylocalbytes.com/products/smart-plug-pm?variant=41600621510847
+
+## Commands
+
+docker exec -it $(docker container ls | grep rpi-ardcli | cut -f1 -d " ") /bin/sh
