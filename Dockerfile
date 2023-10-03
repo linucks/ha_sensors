@@ -27,7 +27,7 @@ RUN mkdir $ARDUINO_DIRECTORIES_USER
 RUN apt-get update \
   && apt-get install -y git \
   && apt-get install -y vim  \
-  && apt-get install -y screen \
+  && apt-get install -y screen
 
 RUN curl -LO https://github.com/arduino/arduino-cli/releases/download/0.34.2/${CLITAR} \
   && tar xvzf ${CLITAR} \
