@@ -2,99 +2,16 @@
 
 This repository provides a Home Assistant plugin to allow a DFRobot HAT to be flashed from a Raspberry Pi running Home Assistant
 
-## Installation of the Base Home Assistant OS
+## Installation of the Base Home Assistant OS and DFRobot sensors
 * Flash an SD card with a full installation of Home Assistant and boot the Raspberry PI.
-* Install Tailscale and community SSH addons to facilitate access to the pi.
+* Install Tailscale and community SSH addons to facilitate ssh access to the pi.
 * Install the MQTT Eclipse addon and run on ports 1833/4 8883/4
 * Install the [MQTT IO](https://github.com/hassio-addons/addon-mqtt-io) addon to read the sensor data coming from /dev/ttyACM0 on the pi.
-
-On the pi, config/mqtt-io/config.yml had:
-```
-mqtt:
-  host: core-mosquitto
-  port: 1883
-  user: addons
-  password: Xi0nae7xeiboo8EiDeech9eing7zoathoh8eijoogoogeiz0Kaixef1reisha9oy
-  topic_prefix: jens
-  ha_discovery:
-    enabled: yes
-
-stream_modules:
-  - name: dfrobot
-    module: serial
-    device: /dev/ttyACM0
-    baud: 9600
-    read_interval: 60
-```
-
-The config/configuration.yml file:
-
-```
-# Loads default set of integrations. Do not remove.
-default_config:
-
-# Load frontend themes from the themes folder
-#frontend: themes: !include_dir_merge_named themes
-automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
-
-mqtt:
-  - sensor:
-      unique_id: mqtt_io_temp
-      name: "MQTT Temp"
-      state_topic: "jens/stream/dfrobot"
-      unit_of_measurement: "C"
-      expire_after: 60
-      value_template: >-
-        {% from 'mqtt_parser.jinja' import parse_stream %}
-        {{ parse_stream(value,'tempair') }}
-
-  - sensor:
-      unique_id: mqtt_io_humidity
-      name: "MQTT Humidity"
-      state_topic: "jens/stream/dfrobot"
-      unit_of_measurement: "humidity"
-      expire_after: 60
-      value_template: >-
-        {% from 'mqtt_parser.jinja' import parse_stream %}
-        {{ parse_stream(value,'humidity') }}
-
-  - sensor:
-      unique_id: mqtt_io_light
-      name: "MQTT Light"
-      state_topic: "jens/stream/dfrobot"
-      unit_of_measurement: "lux"
-      expire_after: 60
-      value_template: >-
-        {% from 'mqtt_parser.jinja' import parse_stream %}
-        {{ parse_stream(value,'light') }}
-
-  - sensor:
-      unique_id: mqtt_io_co2
-      name: "MQTT CO2"
-      state_topic: "jens/stream/dfrobot"
-      unit_of_measurement: "ppm"
-      expire_after: 60
-      value_template: >-
-        {% from 'mqtt_parser.jinja' import parse_stream %}
-        {{ parse_stream(value,'co2') }}
-
-  - sensor:
-      unique_id: mqtt_io_cec
-      name: "MQTT EC"
-      state_topic: "jens/stream/dfrobot"
-      unit_of_measurement: "ec"
-      expire_after: 60
-      value_template: >-
-        {% from 'mqtt_parser.jinja' import parse_stream %}
-        {{ parse_stream(value,'ec') }}
-```
+* copy/update the files from the config directory of this repository to the config directory on the pi.
 
 ## Getting this Addon to work
 * Build and upload the docker image using the build.sh script.
 * ?? copy the config.yml file to the pi in the folder /root/addons/ha_sensors
-
 
 
 ## Tapo Webcam
@@ -117,11 +34,10 @@ scp custom_components/tapo_control to the config folder on the pi. NB by default
 - https://github.com/hassio-addons/addon-tailscale
 
 ### Useful Addons
-
+For editing the YAML files (although it was very buggy)
 - https://github.com/hassio-addons/addon-vscode
 
 ## Networking
-
 To configure the connection for a wifi not present at setup:
 
 - https://github.com/home-assistant/operating-system/blob/dev/Documentation/network.md
