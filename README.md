@@ -12,6 +12,12 @@ This repository provides a Home Assistant plugin to allow a DFRobot HAT to be fl
 ## Getting this Addon to work
 * Build and upload the docker image using the build.sh script.
 * ?? copy the config.yml file to the pi in the folder /root/addons/ha_sensors
+* Go to the hassio/addon page and install the addon
+* Go to the page `hassio/addon/local_rpi-ardcli/info` and start the addon
+* ssh into the rpi and enter the container: `docker exec -it $(docker ps | grep ardcli | awk '{print $NF}') /bin/bash`
+* cd into the arduino code directory: `cd /rpi_arduino_shield/rpi_arduino_shield`
+* edit `rpi_arduino_shield.ino` and upload to the hat with: `../upload.sh`
+* stop the addon.
 
 
 ## Tapo Webcam
