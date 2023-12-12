@@ -30,6 +30,20 @@ scp custom_components/tapo_control to the config folder on the pi. NB by default
 ## USB Webcam
 * use [Motion Eye plugin](https://github.com/hassio-addons/addon-motioneye) to control the USB webcam.
 
+## Power Strip
+### Wifi
+* Find a USB wifi dongle that is natively supported by HA (https://github.com/morrownr/USB-WiFi).
+* Decided on 2.4GHz model from the pi hut https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
+
+Asus USB-N13
+
+* https://www.mylocalbytes.com/
+
+
+### Zigbee
+* https://www.zigbee2mqtt.io/supported-devices/#e=energy
+
+
 
 ## Required Addons
 
@@ -38,15 +52,20 @@ scp custom_components/tapo_control to the config folder on the pi. NB by default
 - https://github.com/home-assistant/addons/tree/master/mosquitto
 - https://github.com/hassio-addons/addon-motioneye
 - https://github.com/hassio-addons/addon-tailscale
+- https://github.com/hassio-addons/addon-vscode (For editing the YAML files (although it was very buggy)
 
-### Useful Addons
-For editing the YAML files (although it was very buggy)
-- https://github.com/hassio-addons/addon-vscode
+### Random Stuff
+* Products: https://www.athom.tech/where-to-buy
+* Products: https://www.mylocalbytes.com/
+* ESP flasher: https://www.tindie.com/products/makerspacelt/esp-12f-flasher-v1/
+
 
 ## Networking
 To configure the connection for a wifi not present at setup:
 
-- https://github.com/home-assistant/operating-system/blob/dev/Documentation/network.md
+* https://github.com/home-assistant/operating-system/blob/dev/Documentation/network.md
+* https://community.home-assistant.io/t/configure-wifi-connection/157201/29
+
 
 ## MQTT
 
