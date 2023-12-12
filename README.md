@@ -81,34 +81,8 @@ To configure the connection for a wifi not present at setup:
 
 ## Commands
 
-docker exec -it $(docker container ls | grep rpi-ardcli | cut -f1 -d " ") /bin/sh
+`docker exec -it $(docker container ls | grep rpi-ardcli | cut -f1 -d " ") /bin/sh`
 
-ha network update wlan0 --ipv4-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid 'FARMURBAN' --wifi-psk 'XXX'
-
-a40cadcb7a7e19f1
-
-go_memstats_heap_alloc_bytes
-
-CONFIG/network/my-network
-[connection]
-id=my-network
-uuid=da120cca-5e30-4014-824c-7ba5dc0147aa
-type=802-11-wireless
-
-[802-11-wireless]
-mode=infrastructure
-ssid=FARMURBAN
-
-[802-11-wireless-security]
-auth-alg=open
-key-mgmt=wpa-psk
-psk=FARM123!
-
-[ipv4]
-method=auto
-
-[ipv6]
-method=auto
-addr-gen-mode=default
+`ha network update wlan0 --ipv4-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid 'FARMURBAN' --wifi-psk 'XXX'``
 
 `nmcli con show`

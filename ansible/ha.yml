@@ -1,0 +1,28 @@
+# Run with 
+#ansible-playbook -i 100.101.225.134, ha.yml
+# ---
+# - hosts: home-assistant
+#   become: true
+#   # vars:
+#   #   ha_user: ha
+#   #   ha_port: 8123
+#   #   ha_conf_dir: /opt/home-assistant
+- name: My First Play
+  hosts: all
+  remote_user: fu
+  become: true
+  tasks:
+    - name: Extract supervisor token
+      ansible.builtin.command: cat /etc/profile.d/homeassistant.sh
+      register: homeassistant_profile
+    - name: Set supervisor token var
+      set_fact:
+        ha_supervisor_token: "{{ homeassistant_profile.stdout | regex_search('export SUPERVISOR_TOKEN=\"([a-f0-9]+)\"$', '\\1') | first }}"
+      changed_when: false
+    - name: Validate new configuration
+      ansible.builtin.command: "/usr/bin/ha info --api-token {{ ha_supervisor_token }}"
+      register: ha_info
+    - debug: msg="jmht:{{ ha_info.stdout }}"
+
+#   tasks:
+  # - include: tasks/main.yml
