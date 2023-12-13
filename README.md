@@ -39,6 +39,9 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 * Decided on 2.4GHz model from the pi hut https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
 * Asus USB-N13
 
+# Create access point
+https://github.com/mattlongman/Hassio-Access-Point
+
 ### Zigbee
 * https://www.zigbee2mqtt.io/supported-devices/#e=energy
 

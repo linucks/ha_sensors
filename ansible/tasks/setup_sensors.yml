@@ -28,14 +28,13 @@
 - name: Start addon
   ansible.builtin.command: ha addons start local_rpi-ardcli
 
+- name: Flash the code to the arduino
 # No requests module in the docker container
-# - name: Flash the code to the arduino
 #   community.docker.docker_container_exec:
 #     container: addon_local_rpi-ardcli
 #     command: /bin/bash -c "../update.sh"
 #     chdir: /rpi_arduino_shield/rpi_arduino_shield
 #   register: result
-- name: Flash the code to the arduino
   command: docker exec -it addon_local_rpi-ardcli bash -c 'cd /rpi_arduino_shield/rpi_arduino_shield; ../upload.sh'
 
 - name: Stop addon
