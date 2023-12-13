@@ -1,0 +1,42 @@
+# - name: Print supervisor token
+#   debug:
+#     msg: "Supervisor token is {{ lookup('env', 'SUPERVISOR_TOKEN') }}"
+
+- name: Copy template file for reading sensor data
+  ansible.builtin.copy:
+    src: files/mqtt_parser.jinja
+    dest: /root/config/custom_templates/mqtt_parser.jinja
+    owner: root
+    group: root
+
+- name: Create ha_sensors addon directory
+  ansible.builtin.file:
+    path: /root/addons/ha_sensors
+    state: directory
+
+- name: Create addon config.yml file
+  ansible.builtin.copy:
+    src: files/config.yml
+    dest: /root/addons/ha_sensors/config.yml
+    owner: root
+    group: root
+
+- name: Install addon
+  ansible.builtin.command: ha addons install local_rpi-ardcli
+  ignore_errors: true # It might already be installed
+
+- name: Start addon
+  ansible.builtin.command: ha addons start local_rpi-ardcli
+
+# No requests module in the docker container
+# - name: Flash the code to the arduino
+#   community.docker.docker_container_exec:
+#     container: addon_local_rpi-ardcli
+#     command: /bin/bash -c "../update.sh"
+#     chdir: /rpi_arduino_shield/rpi_arduino_shield
+#   register: result
+- name: Flash the code to the arduino
+  command: docker exec -it addon_local_rpi-ardcli bash -c 'cd /rpi_arduino_shield/rpi_arduino_shield; ../upload.sh'
+
+- name: Stop addon
+  ansible.builtin.command: ha addons stop local_rpi-ardcli

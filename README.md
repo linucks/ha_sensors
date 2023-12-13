@@ -10,6 +10,7 @@ This repository provides a Home Assistant plugin to allow a DFRobot HAT to be fl
 * copy/update the files from the config directory of this repository to the config directory on the pi.
 
 ## Getting this Addon to work
+* Checkout `https://github.com/linucks/fu_sensors` to build the docker image (if updating)
 * Build and upload the docker image using the build.sh script.
 * ?? copy the config.yml file to the pi in the folder /root/addons/ha_sensors
 * Go to the hassio/addon page and install the addon
