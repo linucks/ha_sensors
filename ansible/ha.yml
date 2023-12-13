@@ -8,9 +8,9 @@
   gather_facts: no
   tasks:
   - import_tasks: tasks/set_supervisor_token.yml
-  - import_tasks: tasks/setup_sensors.yml
-    environment:
-      SUPERVISOR_TOKEN: "{{ ha_supervisor_token }}"
-  - import_tasks: tasks/setup_mqttio.yml
+  - block:
+    - import_tasks: tasks/setup_sensors.yml
+    - import_tasks: tasks/setup_mqttio.yml
+    - import_tasks: tasks/setup_configuration.yml
     environment:
       SUPERVISOR_TOKEN: "{{ ha_supervisor_token }}"

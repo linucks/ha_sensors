@@ -1,0 +1,15 @@
+- name: Copy addon config.yml file
+  ansible.builtin.copy:
+    src: files/mqtt.yml
+    dest: /root/config/mqtt.yaml
+    owner: root
+    group: root
+
+- name: Add mqtt section to configuration.yaml
+  ansible.builtin.lineinfile:
+    path: /root/config/configuration.yaml
+    line: 'mqtt: !include  mqtt.yaml'
+
+- name: Restart HA
+  ansible.builtin.command: ha core restart
+

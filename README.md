@@ -1,25 +1,18 @@
 # ha_sensors
+This repository is used to provision a Raspberry Pi with a Home Assistant installation for monitoring and controlling Farm Urban Edible Walls.
 
-This repository provides a Home Assistant plugin to allow a DFRobot HAT to be flashed from a Raspberry Pi running Home Assistant
+The Raspberry Pi requires an Arduino Shield for attaching the sensors:
+* [Gravity: Arduino Shield for Raspberry Pi B+/2B/3B/3B+/4B](https://www.dfrobot.com/product-1211.html)
+* [Gravity: DHT22 Temperature & Humidity Sensor](https://www.dfrobot.com)product-1102.html)
+* [Gravity: Analog Electrical Conductivity Sensor /Meter V2](https://www.dfrobot.com/product-1123.html)
+* [Gravity: Analog pH Sensor/Meter Kit V2](https://www.dfrobot.com/product-1782.html)
+
 
 ## Installation of the Base Home Assistant OS and DFRobot sensors
-* Flash an SD card with a full installation of Home Assistant and boot the Raspberry PI.
+* Flash an SD card with a full installation of Home Assistant and boot the Raspberry PI (use Baleener Etcher).
 * Install Tailscale and community SSH addons to facilitate ssh access to the pi.
-* Install the MQTT Eclipse addon and run on ports 1833/4 8883/4
-* Install the [MQTT IO](https://github.com/hassio-addons/addon-mqtt-io) addon to read the sensor data coming from /dev/ttyACM0 on the pi.
-* copy/update the files from the config directory of this repository to the config directory on the pi.
-
-## Getting this Addon to work
-* Checkout `https://github.com/linucks/fu_sensors` to build the docker image (if updating)
-* Build and upload the docker image using the build.sh script.
-* ?? copy the config.yml file to the pi in the folder /root/addons/ha_sensors
-* Go to the hassio/addon page and install the addon
-* Go to the page `hassio/addon/local_rpi-ardcli/info` and start the addon
-* ssh into the rpi and enter the container: `docker exec -it $(docker ps | grep ardcli | cut -f1 -d " ") /bin/bash`
-* cd into the arduino code directory: `cd /rpi_arduino_shield/rpi_arduino_shield`
-* edit `rpi_arduino_shield.ino` and upload to the hat with: `../upload.sh`
-* stop the addon.
-
+*  Ensure ansible is installed on the host machine and run the ansible script in the ansible directory:
+  `ansible-playbook -i 100.101.225.134, ha.yml`
 
 ## Tapo Webcam
 Clone repository from https://github.com/JurajNyiri/HomeAssistant-Tapo-Control
@@ -27,51 +20,36 @@ scp custom_components/tapo_control to the config folder on the pi. NB by default
 * add the webcam to the network using the Tapo app.
 * create a camera account on the camera with the Tapo app (Camera -> Device Settings -> Advanced Settings -> Camera Account)
 
-
 ## USB Webcam
 * use [Motion Eye plugin](https://github.com/hassio-addons/addon-motioneye) to control the USB webcam.
+
+## Creating the addon Docker Image
+* Checkout `https://github.com/linucks/fu_sensors` to build the docker image (if updating)
+* Edit the build.sh to set the SENSOR_DIR variable to the location of the above repository.
+* Run the `build.sh` script to build and upload the Docker image to github.
 
 ## Power Strip
 ### Wifi
 * Find a USB wifi dongle that is natively supported by HA (https://github.com/morrownr/USB-WiFi).
 * Decided on 2.4GHz model from the pi hut https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
-
-Asus USB-N13
-
-* https://www.mylocalbytes.com/
-
+* Asus USB-N13
 
 ### Zigbee
 * https://www.zigbee2mqtt.io/supported-devices/#e=energy
-
-
-
-## Required Addons
-
-- https://github.com/hassio-addons/addon-ssh
-- https://github.com/hassio-addons/addon-mqtt-io
-- https://github.com/home-assistant/addons/tree/master/mosquitto
-- https://github.com/hassio-addons/addon-motioneye
-- https://github.com/hassio-addons/addon-tailscale
-- https://github.com/hassio-addons/addon-vscode (For editing the YAML files (although it was very buggy)
 
 ### Random Stuff
 * Products: https://www.athom.tech/where-to-buy
 * Products: https://www.mylocalbytes.com/
 * ESP flasher: https://www.tindie.com/products/makerspacelt/esp-12f-flasher-v1/
 
-
 ## Networking
 To configure the connection for a wifi not present at setup:
-
 * https://github.com/home-assistant/operating-system/blob/dev/Documentation/network.md
 * https://community.home-assistant.io/t/configure-wifi-connection/157201/29
 
 
 ## MQTT
-
 ### Security
-
 - https://tasmota.github.io/docs/Securing-your-IoT-from-hacking/
 - https://www.hivemq.com/blog/mqtt-security-fundamentals-securing-mqtt-systems/
 - https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-16-04
