@@ -3,9 +3,14 @@ This repository is used to provision a Raspberry Pi with a Home Assistant instal
 
 The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 * [Gravity: Arduino Shield for Raspberry Pi B+/2B/3B/3B+/4B](https://www.dfrobot.com/product-1211.html)
-* [Gravity: DHT22 Temperature & Humidity Sensor](https://www.dfrobot.com)product-1102.html)
+* [Gravity: DHT22 Temperature & Humidity Sensor](https://www.dfrobot.com/product-1102.html)
+* [Gravity: PWM Infrared Carbon Dioxide Sensor (400-5000 ppm)](https://www.dfrobot.com/product-1549.html)
+* [Gravity: Waterproof DS18B20 Temperature Sensor Kit](https://www.dfrobot.com/product-1354.html)
+* [Gravity: Analog Ambient Light Sensor for Arduino / ESP32 / micro:bit / Raspberry Pi (1~6000 Lux)](https://www.dfrobot.com/product-1004.html)
 * [Gravity: Analog Electrical Conductivity Sensor /Meter V2](https://www.dfrobot.com/product-1123.html)
 * [Gravity: Analog pH Sensor/Meter Kit V2](https://www.dfrobot.com/product-1782.html)
+* [Gravity: Analog Signal Isolator](https://www.dfrobot.com/product-1621.html)
+
 
 
 ## Installation of the Base Home Assistant OS and DFRobot sensors
