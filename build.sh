@@ -1,11 +1,12 @@
 #!/bin/bash
+# A clone of: git clone git@github.com:linucks/fu_sensors.git
+SENSOR_DIR=/opt/fu_sensors
 IMAGE_REPO=ghcr.io/linucks
 IMAGE_NAME=rpi-ardcli
 IMAGE_TAG=latest
-SENSOR_DIR=/opt/fu_sensors
 
-export CR_PAT=ghp_WIs2jKeqQjmhtDmn1lKp17R6PQ29UXHYiOr2aECW7
-echo $CR_PAT | docker login ghcr.io -u linucks --password-stdin
+export CR_PAT=ghp_jmhtqAVdtLH595BoG6U6FYzsvSuS4e7zaR0oPhj6
+echo $CR_PAT | docker login ghcr.io --username linucks --password-stdin
 
 # Docker needs relative paths
 cp -r $SENSOR_DIR/sensors/rpi_arduino_shield .
