@@ -10,6 +10,3 @@
     path: /root/config/configuration.yaml
     line: 'mqtt: !include  mqtt.yaml'
 
-- name: Restart HA
-  ansible.builtin.command: ha core restart
-

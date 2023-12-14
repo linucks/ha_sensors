@@ -1,0 +1,16 @@
+- name: Git checkout
+  ansible.builtin.git:
+    repo: 'https://github.com/JurajNyiri/HomeAssistant-Tapo-Control.git'
+    dest: "/home/{{ ansible_user }}/HomeAssistant-Tapo-Control"
+
+- name: Create custom_components directory if it doesn't already exist
+  ansible.builtin.file:
+    path: /root/config/custom_components
+    state: directory
+
+- name: Copy to config directory
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/HomeAssistant-Tapo-Control/custom_components/tapo_control
+    dest: /root/config/custom_components
+    remote_src: true
+

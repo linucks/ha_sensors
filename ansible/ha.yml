@@ -12,5 +12,8 @@
     - import_tasks: tasks/setup_sensors.yml
     - import_tasks: tasks/setup_mqttio.yml
     - import_tasks: tasks/setup_configuration.yml
+    - import_tasks: tasks/setup_tapo.yml
     environment:
       SUPERVISOR_TOKEN: "{{ ha_supervisor_token }}"
+  - name: Restart HA
+  ansible.builtin.command: ha core restart
