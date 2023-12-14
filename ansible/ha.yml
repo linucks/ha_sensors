@@ -16,4 +16,4 @@
     environment:
       SUPERVISOR_TOKEN: "{{ ha_supervisor_token }}"
   - name: Restart HA
-  ansible.builtin.command: ha core restart
+    ansible.builtin.command: ha core restart
