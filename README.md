@@ -12,16 +12,14 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 * [Gravity: Analog Signal Isolator](https://www.dfrobot.com/product-1621.html)
 
 
-
 ## Installation of the Base Home Assistant OS and DFRobot sensors
 * Flash an SD card with a full installation of Home Assistant and boot the Raspberry PI (use Baleener Etcher).
 * Install Tailscale and community SSH addons to facilitate ssh access to the pi.
 *  Ensure ansible is installed on the host machine and run the ansible script in the ansible directory:
   `ansible-playbook -i 100.101.225.134, ha.yml`
 
-## Tapo Webcam
-* Clone repository from https://github.com/JurajNyiri/HomeAssistant-Tapo-Control
-* scp `custom_components/tapo_control` to the config folder on the pi. NB by default scp copies into the user account so I found it easiest to tgz the file and then unpack at the other end.
+## Setup of Tapo Webcam
+* the addon is setup by the ansible script.
 * add the webcam to the network using the Tapo app.
 * create a camera account on the camera with the Tapo app (Camera -> Device Settings -> Advanced Settings -> Camera Account)
 
