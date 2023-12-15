@@ -5,7 +5,7 @@
   hosts: all
   remote_user: fu
   become: true
-  gather_facts: no
+  gather_facts: false
   tasks:
   - import_tasks: tasks/set_supervisor_token.yml
   - block:
@@ -13,6 +13,7 @@
     - import_tasks: tasks/setup_mqttio.yml
     - import_tasks: tasks/setup_tapo.yml
     - import_tasks: tasks/setup_configuration.yml
+    - import_tasks: tasks/setup_ap.yml
     - name: Restart HA
       ansible.builtin.command: ha core restart
     environment:
