@@ -34,7 +34,7 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 ## Power Strip
 ### Wifi
 * Find a USB wifi dongle that is natively supported by HA (https://github.com/morrownr/USB-WiFi).
-* Decided on 2.4GHz model from the pi hut https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
+* Decided on 2.4GHz model from the pi hut: https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
 * Asus USB-N13
 
 # Create access point
@@ -47,6 +47,10 @@ https://github.com/mattlongman/Hassio-Access-Point
 * Products: https://www.athom.tech/where-to-buy
 * Products: https://www.mylocalbytes.com/
 * ESP flasher: https://www.tindie.com/products/makerspacelt/esp-12f-flasher-v1/
+
+### Cheap plugs but unsure if suitable
+* https://www.diy.com/departments/arlec-smart-socket-3-gang-3-metre/9311644542407_BQ.prd
+* https://uk.gosund.com/collections/smart-plugs-and-outlets/products/smart-power-strip-up9
 
 ## Networking
 To configure the connection for a wifi not present at setup:
