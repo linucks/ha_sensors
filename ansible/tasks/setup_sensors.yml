@@ -9,17 +9,30 @@
     owner: root
     group: root
 
-- name: Create ha_sensors addon directory
+- name: Create ha_sensors addon directory for installation of the addon
   ansible.builtin.file:
     path: /root/addons/ha_sensors
     state: directory
 
 - name: Create addon config.yml file
   ansible.builtin.copy:
-    src: files/config.yml
+    src: ../rpi-ardcli/config.yml
     dest: /root/addons/ha_sensors/config.yml
     owner: root
     group: root
+
+- name: Create addon_config directory
+  ansible.builtin.file:
+    path: /root/addon_configs/local_rpi-ardcli
+    state: directory
+
+- name: Copy arduino script across
+  ansible.builtin.copy:
+    src: files/rpi_arduino_shield.ino
+    dest: /root/addon_configs/local_rpi-ardcli/rpi_arduino_shield.ino
+
+- name: Refresh store to pick up new local addon
+  ansible.builtin.command: ha store refresh
 
 - name: Install addon
   ansible.builtin.command: ha addons install local_rpi-ardcli
@@ -28,14 +41,14 @@
 - name: Start addon
   ansible.builtin.command: ha addons start local_rpi-ardcli
 
-- name: Flash the code to the arduino
-# No requests module in the docker container
-#   community.docker.docker_container_exec:
-#     container: addon_local_rpi-ardcli
-#     command: /bin/bash -c "../update.sh"
-#     chdir: /rpi_arduino_shield/rpi_arduino_shield
-#   register: result
-  command: docker exec -it addon_local_rpi-ardcli bash -c 'cd /rpi_arduino_shield/rpi_arduino_shield; ../upload.sh'
+# - name: Flash the code to the arduino
+# # No requests module in the docker container
+# #   community.docker.docker_container_exec:
+# #     container: addon_local_rpi-ardcli
+# #     command: /bin/bash -c "../update.sh"
+# #     chdir: /rpi_arduino_shield/rpi_arduino_shield
+# #   register: result
+#   command: docker exec -it addon_local_rpi-ardcli bash -c 'cd /rpi_arduino_shield/rpi_arduino_shield; ../upload.sh'
 
 - name: Stop addon
   ansible.builtin.command: ha addons stop local_rpi-ardcli

@@ -33,7 +33,6 @@ RUN curl -LO https://github.com/arduino/arduino-cli/releases/download/0.34.2/${C
   && rm ${CLITAR} LICENSE.txt \
   && mv arduino-cli /usr/bin
 
-# RUN arduino-cli core install esp32:esp32 --additional-urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
 RUN arduino-cli config init
 RUN arduino-cli core update-index
 RUN arduino-cli core install  arduino:avr
@@ -42,10 +41,13 @@ RUN arduino-cli core install  arduino:avr
 RUN arduino-cli lib install "DHT sensor library for ESPx"
 # For DFR0198: Waterproof DS18B20 Sensor Kit
 RUN arduino-cli lib install OneWire
-# JSON
 RUN arduino-cli lib install ArduinoJson
-# DEFOBOT EC
 RUN git clone https://github.com/linucks/DFRobot_EC.git $ARDUINO_LIBDIR/DFRobot_EC
-# DEFOBOT pH
 RUN git clone https://github.com/linucks/DFRobot_PH.git $ARDUINO_LIBDIR/DFRobot_PH
+
+# For mounting /addon_configs/local_rpi-ardcli
+RUN mkdir /config
+
+WORKDIR $BASEDIR/rpi_arduino_shield
+CMD "cp /config/rpi_arduino_shield.ino . && ../upload.sh"
 

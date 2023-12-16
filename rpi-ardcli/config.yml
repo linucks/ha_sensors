@@ -3,6 +3,8 @@ description: "Arduino CLI for Raspberry Pi"
 version: "latest"
 slug: "rpi-ardcli"
 init: false
+arch:
+  - aarch64
 #uart: true
 full_access: true
 homeassistant_api: true
@@ -10,6 +12,6 @@ devices:
   - /dev/ttyACM0
 # services:
 #   - mqtt:need
-arch:
-  - aarch64
+map:
+  - addon_config:rw
 image: "ghcr.io/linucks/rpi-ardcli"
