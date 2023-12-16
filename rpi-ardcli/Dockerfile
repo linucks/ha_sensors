@@ -49,5 +49,5 @@ RUN git clone https://github.com/linucks/DFRobot_PH.git $ARDUINO_LIBDIR/DFRobot_
 RUN mkdir /config
 
 WORKDIR $BASEDIR/rpi_arduino_shield
-CMD "cp /config/rpi_arduino_shield.ino . && ../upload.sh"
+CMD "sleep 3 && cp /config/rpi_arduino_shield.ino . && ../upload.sh"
 
