@@ -49,5 +49,30 @@ RUN git clone https://github.com/linucks/DFRobot_PH.git $ARDUINO_LIBDIR/DFRobot_
 RUN mkdir /config
 
 WORKDIR $BASEDIR/rpi_arduino_shield
-CMD "sleep 3 && cp /config/rpi_arduino_shield.ino . && ../upload.sh"
+
+RUN printf "#!/bin/bash \n\
+export HOME=/root \n\
+export ARDUINO_DIRECTORIES_USER=$ARDUINO_DIRECTORIES_USER \n\
+export ARDUINO_DIRECTORIES_DATA=$ARDUINO_DIRECTORIES_DATA \n\
+export ARDUINO_DIRECTORIES_DOWNLOADS=$ARDUINO_DIRECTORIES_DOWNLOADS \n\
+export ARDUINO_LIBDIR=$ARDUINO_LIBDIR \n\
+echo env... \n\
+env \n\
+if [ ! -f /config/rpi_arduino_shield.ino ]; then \n\
+  echo Cannot find file /config/rpi_arduino_shield.ino \n\
+  ls -l /config \n\
+  exit 1 \n\
+fi \n\
+cp /config/rpi_arduino_shield.ino . \n\
+if [ ! -f ../upload.sh ]; then \n\
+  echo Cannot find file ../upload.sh \n\
+  ls -l .. \n\
+  exit 1 \n\
+fi \n\
+echo executing upload.sh \n\
+../upload.sh \n\
+echo waiting... \n\
+tail -f /dev/null" > ./script.sh
+RUN chmod +x ./script.sh
+CMD ["sh", "-c", "./script.sh"]
 
