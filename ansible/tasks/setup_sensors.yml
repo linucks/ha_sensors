@@ -1,6 +1,10 @@
 # - name: Print supervisor token
 #   debug:
 #     msg: "Supervisor token is {{ lookup('env', 'SUPERVISOR_TOKEN') }}"
+- name: Create Custom templates directory
+  ansible.builtin.file:
+    path: /root/config/custom_templates
+    state: directory
 
 - name: Copy template file for reading sensor data
   ansible.builtin.copy:
@@ -14,19 +18,19 @@
     path: /root/addons/ha_sensors
     state: directory
 
-- name: Create addon config.yml file
+- name: Create rpi-ardcli addon config.yml file
   ansible.builtin.copy:
     src: ../rpi-ardcli/config.yml
     dest: /root/addons/ha_sensors/config.yml
     owner: root
     group: root
 
-- name: Create addon_config directory
+- name: Create rpi-ardcli addon_config directory
   ansible.builtin.file:
     path: /root/addon_configs/local_rpi-ardcli
     state: directory
 
-- name: Copy arduino script across
+- name: Copy rpi-ardcli arduino script across
   ansible.builtin.copy:
     src: files/rpi_arduino_shield.ino
     dest: /root/addon_configs/local_rpi-ardcli/rpi_arduino_shield.ino
@@ -34,11 +38,11 @@
 - name: Refresh store to pick up new local addon
   ansible.builtin.command: ha store refresh
 
-- name: Install addon
+- name: Install rpi-ardcli addon
   ansible.builtin.command: ha addons install local_rpi-ardcli
   ignore_errors: true # It might already be installed
 
-- name: Start addon
+- name: Start rpi-ardcli addon
   ansible.builtin.command: ha addons start local_rpi-ardcli
 
 # - name: Flash the code to the arduino
@@ -50,5 +54,5 @@
 # #   register: result
 #   command: docker exec -it addon_local_rpi-ardcli bash -c 'cd /rpi_arduino_shield/rpi_arduino_shield; ../upload.sh'
 
-- name: Stop addon
+- name: Stop rpi-ardcli addon
   ansible.builtin.command: ha addons stop local_rpi-ardcli

@@ -1,10 +1,10 @@
-- name: Add repository
+- name: Add hassio-access-point repository
   ansible.builtin.command: ha store add https://github.com/mattlongman/hassio-access-point
 
-- name: Install add-on
+- name: Install hassio-access-point add-on
   ansible.builtin.command: ha addons install 30e576d0_hassio-access-point
 
-- name: Set Add-on options
+- name: Set hassio-access-point Add-on options
   ansible.builtin.uri:
     url: http://supervisor/addons/30e576d0_hassio-access-point/options
     method: POST
@@ -13,13 +13,13 @@
     body: |
       { "options":
         {
-        "ssid": "EWAPXX",
-        "wpa_passphrase": "",
+        "ssid": "FUEW",
+        "wpa_passphrase": "1234567890",
         "channel": "6",
         "address": "192.168.99.1",
         "netmask": "255.255.255.0",
         "broadcast": "192.168.99.255",
-        "interface": "wlanXX",
+        "interface": "wlan0",
         "hide_ssid": "0",
         "dhcp": "0",
         "dhcp_start_addr": "192.168.99.10",

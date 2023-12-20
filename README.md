@@ -13,10 +13,21 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 
 
 ## Installation of the Base Home Assistant OS and DFRobot sensors
-* Flash an SD card with a full installation of Home Assistant and boot the Raspberry PI (use Baleener Etcher).
-* Install Tailscale and community SSH addons to facilitate ssh access to the pi.
-*  Ensure ansible is installed on the host machine and run the ansible script in the ansible directory:
-  `ansible-playbook -i 100.101.225.134, ha.yml`
+* Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to flash an SD card with the Home Assistant OS.
+* Insert SD card and second USB wifi dongle into the pi.
+* On OSX: System Preferences -> Sharing -> Internet Sharing: On
+* Plug ethernet cable into Mac and the Raspberry Pi.
+* Go to: http://homeassistant.local:8123/ and do basic setup (user: fu)
+* Settings -> Add-ons -> ADD-ON STORE
+  * Install [Advanced SSH Addon](https://github.com/hassio-addons/addon-ssh) and set `username` and `authorized_keys`. Turn off the Protected Mode for the addon (required to accces docker on the installation).
+  * Install Tailscale, start the addon, and look in the logs to the the authorisation url, go there and authenticate.
+
+## Network and AP setup
+Settings -> System -> Network
+* Set USB wifi card (WLP1SOU1U2) to IP4 to `automatic`
+
+## Setup installation using the Ansible script
+Install ansible on the host machine and then run the ansible script in the `ansible` directory of this repository with: `ansible-playbook -i 100.76.171.127, ha.yml`
 
 ## Setup of Tapo Webcam
 * the addon is setup by the ansible script.

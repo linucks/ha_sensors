@@ -1,5 +1,5 @@
 # Run with 
-#ansible-playbook -i 100.101.225.134, ha.yml
+#ansible-playbook -i 100.76.171.127, ha.yml
 # ---
 - name: Setup Edible Wall Home Assistant
   hosts: all
@@ -10,11 +10,11 @@
   - import_tasks: tasks/set_supervisor_token.yml
   - block:
     - import_tasks: tasks/setup_sensors.yml
-    # - import_tasks: tasks/setup_mqttio.yml
-    # - import_tasks: tasks/setup_tapo.yml
-    # - import_tasks: tasks/setup_configuration.yml
-    # - import_tasks: tasks/setup_ap.yml
-    # - name: Restart HA
-    #   ansible.builtin.command: ha core restart
+    - import_tasks: tasks/setup_mqttio.yml
+    - import_tasks: tasks/setup_tapo.yml
+    - import_tasks: tasks/setup_configuration.yml
+    - import_tasks: tasks/setup_ap.yml
+    - name: Restart HA
+      ansible.builtin.command: ha core restart
     environment:
       SUPERVISOR_TOKEN: "{{ ha_supervisor_token }}"

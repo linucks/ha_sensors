@@ -1,4 +1,4 @@
-- name: Git checkout
+- name: Git checkout tapo_control
   ansible.builtin.git:
     repo: 'https://github.com/JurajNyiri/HomeAssistant-Tapo-Control.git'
     dest: "/home/{{ ansible_user }}/HomeAssistant-Tapo-Control"
@@ -8,7 +8,7 @@
     path: /root/config/custom_components
     state: directory
 
-- name: Copy to config directory
+- name: Copy tapo_control directory to config directory
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/HomeAssistant-Tapo-Control/custom_components/tapo_control
     dest: /root/config/custom_components
