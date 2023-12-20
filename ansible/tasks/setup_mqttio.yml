@@ -1,19 +1,19 @@
-- name: Create mqttio config directory
+- name: Create mqtt-io config directory
   ansible.builtin.file:
     path: /root/config/mqtt-io
     state: directory
 
-- name: Copy addon config.yml file
+- name: Copy mqtt-io addon config.yml file
   ansible.builtin.copy:
     src: files/mqtt-io.yml
     dest: /root/config/mqtt-io/config.yml
     owner: root
     group: root
 
-- name: Install addon
+- name: Install mqtt-io addon
   ansible.builtin.command: ha addons install a0d7b954_mqtt-io
   ignore_errors: true # It might already be installed
 
-- name: Start addon
+- name: Start mqtt-io addon
   ansible.builtin.command: ha addons start a0d7b954_mqtt-io
 
