@@ -18,6 +18,7 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 * On OSX: System Preferences -> Sharing -> Internet Sharing: On
 * Plug ethernet cable into Mac and the Raspberry Pi.
 * Go to: http://homeassistant.local:8123/ and do basic setup (user: fu)
+* Go to user settings and enable Advanced Mode.
 * Settings -> Add-ons -> ADD-ON STORE
   * Install [Advanced SSH Addon](https://github.com/hassio-addons/addon-ssh) and set `username` and `authorized_keys`. Turn off the Protected Mode for the addon (required to accces docker on the installation).
   * Install Tailscale, start the addon, and look in the logs to the the authorisation url, go there and authenticate.
@@ -29,10 +30,14 @@ Settings -> System -> Network
 ## Setup installation using the Ansible script
 Install ansible on the host machine and then run the ansible script in the `ansible` directory of this repository with: `ansible-playbook -i 100.76.171.127, ha.yml`
 
+## Final manual stup
+* Goto Settings -> Devices & Services and click to automatically configure MQTT
+
 ## Setup of Tapo Webcam
 * the addon is setup by the ansible script.
 * add the webcam to the network using the Tapo app.
 * create a camera account on the camera with the Tapo app (Camera -> Device Settings -> Advanced Settings -> Camera Account)
+* If the above doesn't work: Devices and Services -> Add Integration -> Tapo: Cameras Control
 
 ## USB Webcam
 * use [Motion Eye plugin](https://github.com/hassio-addons/addon-motioneye) to control the USB webcam.
@@ -86,3 +91,8 @@ To configure the connection for a wifi not present at setup:
 `ha network update wlan0 --ipv4-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid 'FARMURBAN' --wifi-psk 'XXX'``
 
 `nmcli con show`
+
+
+
+192.168.99.1
+

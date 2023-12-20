@@ -9,8 +9,9 @@
   tasks:
   - import_tasks: tasks/set_supervisor_token.yml
   - block:
+    - import_tasks: tasks/setup_mqtt.yml
     - import_tasks: tasks/setup_sensors.yml
-    - import_tasks: tasks/setup_mqttio.yml
+    - import_tasks: tasks/setup_mqtt-io.yml
     - import_tasks: tasks/setup_tapo.yml
     - import_tasks: tasks/setup_configuration.yml
     - import_tasks: tasks/setup_ap.yml

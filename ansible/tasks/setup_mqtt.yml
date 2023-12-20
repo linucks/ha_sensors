@@ -1,0 +1,7 @@
+- name: Install Eclipse MQTT addon
+  ansible.builtin.command: ha addons install core_mosquitto
+  ignore_errors: true # It might already be installed
+
+- name: Start Eclipse MQTT addon
+  ansible.builtin.command: ha addons start core_mosquitto
+
