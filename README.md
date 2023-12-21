@@ -24,11 +24,15 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
   * Install Tailscale, start the addon, and look in the logs to the the authorisation url, go there and authenticate.
 
 ## Network and AP setup
-Settings -> System -> Network
-* Set USB wifi card (WLP1SOU1U2) to IP4 to `automatic`
+* Settings -> System -> Network:
+  * Set USB wifi card (WLP1SOU1U2) to IP4 to `automatic`. We use this for the connection to the Wifi as it doesn't support AP mode so we use the internal card as the AP (see `tasks\setup_ap.yml`)
 
 ## Setup installation using the Ansible script
-Install ansible on the host machine and then run the ansible script in the `ansible` directory of this repository with: `ansible-playbook -i 100.76.171.127, ha.yml`
+* Install ansible on the host machine.
+* Edit the ansible files in the ansible directory to set:
+  * The MAC/HOSTNAME/IP for the ip camera and plugs in `tasks/setup_ap.yml`
+  * Edit `files//mqtt.yml` to set which sensors are present.
+* Run the ansible script in the `ansible` directory of this repository with: `ansible-playbook -i 100.76.171.127, ha.yml`
 
 ## Final manual stup
 * Goto Settings -> Devices & Services and click to automatically configure MQTT
@@ -47,14 +51,11 @@ Install ansible on the host machine and then run the ansible script in the `ansi
 * Edit the build.sh to set the SENSOR_DIR variable to the location of the above repository.
 * Run the `build.sh` script to build and upload the Docker image to github.
 
-## Power Strip
+## Power Plugs
 ### Wifi
-* Find a USB wifi dongle that is natively supported by HA (https://github.com/morrownr/USB-WiFi).
-* Decided on 2.4GHz model from the pi hut: https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945
-* Asus USB-N13
-
-# Create access point
-https://github.com/mattlongman/Hassio-Access-Point
+* Find a USB wifi dongle that is natively supported by HA (https://github.com/morrownr/USB-WiFi) - this means that it has an in-kernel driver, and supports AP mode.
+* Decided on 2.4GHz model from the [Pi Hut](https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi?variant=758603945), this has a supported driver but doesn't support AP mode, so this is used for for  Pi to connect to the Wifi, and the internal USB card serves as the AP.
+* Could try [Panda PAU03](https://www.amazon.co.uk/Panda-Ultra-150Mbps-Wireless-Adapter/dp/B00762YNMG/) - might have in kernel driver and support AP mode.
 
 ### Zigbee
 * https://www.zigbee2mqtt.io/supported-devices/#e=energy
@@ -80,25 +81,19 @@ To configure the connection for a wifi not present at setup:
 - https://www.hivemq.com/blog/mqtt-security-fundamentals-securing-mqtt-systems/
 - https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-16-04
 
-## Equipment
 
-- https://www.mylocalbytes.com/products/smart-plug-pm?variant=41600621510847
+## Useful Commands
 
-## Commands
-
-`docker exec -it $(docker container ls | grep rpi-ardcli | cut -f1 -d " ") /bin/sh`
-
-`ha network update wlan0 --ipv4-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid 'FARMURBAN' --wifi-psk 'XXX'``
-
-`nmcli con show`
-
-Type `ha addons` to list addons and get the slug
-
+* Enter shell on container: `docker exec -it $(docker container ls | grep rpi-ardcli | cut -f1 -d " ") /bin/sh`
+* Manually set network parameters: `ha network update wlan0 --ipv4-method auto --wifi-auth wpa-psk --wifi-mode infrastructure --wifi-ssid 'FARMURBAN' --wifi-psk 'XXX'``
+* Network on the pi: `nmcli con show`
+* Getting the slug for an addon: `ha addons`
+* Getting options for an addon from the command-line:
 ```
 curl \
 -sSL \
 -H "Authorization: Bearer $SUPERVISOR_TOKEN" \
-http://supervisor/addons/core_mosquitto/info \
+http://supervisor/addons/30e576d0_hassio-access-point/info \
 | jq
 ```
 

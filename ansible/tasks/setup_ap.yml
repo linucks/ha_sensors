@@ -30,8 +30,14 @@
         "hostapd_config_override": [],
         "client_internet_access": "0",
         "client_dns_override": [],
-        "dnsmasq_config_override": []
+        "dnsmasq_config_override": [
+          "dhcp-host=40:ED:00:67:B9:68,Tapo_Camera_B968,192.168.99.12",
+          "dhcp-host=70:03:9F:21:B6:3D,Plug1,192.168.99.19",
+          "dhcp-host=D8:BC:38:8C:A5:E1,Plug2,192.168.99.15"
+      ]
         }
       }
     body_format: json
+
+
 
