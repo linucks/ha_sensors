@@ -2,6 +2,32 @@
   ansible.builtin.command: ha addons install core_mosquitto
   ignore_errors: true # It might already be installed
 
+- name: Set Eclipse MQTT addon options
+  ansible.builtin.uri:
+    url: http://supervisor/addons/core_mosquitto/options
+    method: POST
+    headers:
+      Authorization: "BEARER {{ ha_supervisor_token }}"
+    body: |
+      { "options": {
+          "logins": [
+            {
+              "username": "fuew_mqtt_user",
+              "password": "1234567890"
+            }
+          ],
+          "require_certificate": false,
+          "certfile": "fullchain.pem",
+          "keyfile": "privkey.pem",
+          "customize": {
+            "active": false,
+            "folder": "mosquitto"
+          }
+        }
+      }
+    body_format: json
+
+
 - name: Start Eclipse MQTT addon
   ansible.builtin.command: ha addons start core_mosquitto
 

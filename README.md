@@ -35,8 +35,8 @@ Install ansible on the host machine and then run the ansible script in the `ansi
 
 ## Setup of Tapo Webcam
 * the addon is setup by the ansible script.
+* create a camera account on the camera with the Tapo app (Camera -> Device Settings -> Advanced Settings -> Camera Account).
 * add the webcam to the network using the Tapo app.
-* create a camera account on the camera with the Tapo app (Camera -> Device Settings -> Advanced Settings -> Camera Account)
 * If the above doesn't work: Devices and Services -> Add Integration -> Tapo: Cameras Control
 
 ## USB Webcam
@@ -92,7 +92,25 @@ To configure the connection for a wifi not present at setup:
 
 `nmcli con show`
 
+Type `ha addons` to list addons and get the slug
+
+```
+curl \
+-sSL \
+-H "Authorization: Bearer $SUPERVISOR_TOKEN" \
+http://supervisor/addons/core_mosquitto/info \
+| jq
+```
 
 
-192.168.99.1
+```
+curl  \
+-sSL  \
+-H "Authorization: Bearer $SUPERVISOR_TOKEN"  \
+-X POST  \
+http://supervisor/addons/30e576d0_hassio-access-point/options  \
+-d '{"options": {"addon_option1": 1, "addon_option2": 2}'
+
+
+```
 

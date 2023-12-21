@@ -1,8 +1,8 @@
 mqtt:
   host: core-mosquitto
   port: 1883
-  user: addons
-  password: Xi0nae7xeiboo8EiDeech9eing7zoathoh8eijoogoogeiz0Kaixef1reisha9oy
+  user: fuew_mqtt_user
+  password: "1234567890"
   topic_prefix: jens
   ha_discovery:
     enabled: yes
