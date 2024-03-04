@@ -13,6 +13,18 @@ The Raspberry Pi requires an Arduino Shield for attaching the sensors:
 
 
 ## Installation of the Base Home Assistant OS and DFRobot sensors
+There are currently issues with the network manager interface when using external wifi. One bug is described here:
+https://github.com/home-assistant/supervisor/issues/4383#issuecomment-1963036433
+
+Another issue that we encountered was that the wifi connection disconnects and is then disabled and needs to be manually renabled.
+
+Potentially this bug:
+https://github.com/home-assistant/supervisor/issues/3674
+https://github.com/home-assistant/operating-system/issues/2720
+
+
+For this reason, we've had to ditch the HA OS and will use a standard Linux OS on the RPI and add the HA Supervisor.
+
 * Use the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) to flash an SD card with the Home Assistant OS.
 * Insert SD card and second USB wifi dongle into the pi.
 * On OSX: System Preferences -> Sharing -> Internet Sharing: On
